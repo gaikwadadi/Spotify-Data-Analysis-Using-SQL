@@ -70,10 +70,41 @@ In advanced stages, the focus shifts to improving query performance. Some optimi
 
 ### Easy Level
 1. Retrieve the names of all tracks that have more than 1 billion streams.
+```sql
+SELECT 
+	track, stream
+FROM spotify
+WHERE 
+	stream > 1000000000;
+```
 2. List all albums along with their respective artists.
+```sql
+SELECT
+	DISTINCT album, artist
+FROM spotify;
+```   
 3. Get the total number of comments for tracks where `licensed = TRUE`.
+```sql
+SELECT
+	 SUM(comments)
+FROM spotify
+WHERE licensed = TRUE;
+```   
 4. Find all tracks that belong to the album type `single`.
+```sql
+SELECT 
+	track
+FROM spotify
+WHERE album_type = 'single';
+```   
 5. Count the total number of tracks by each artist.
+```sql
+SELECT 
+	artist as Artist,
+	COUNT(track) AS total_tracks
+FROM spotify
+GROUP BY artist;
+```
 
 ### Medium Level
 1. Calculate the average danceability of tracks in each album.
@@ -166,12 +197,3 @@ This optimization shows how indexing can drastically reduce query time, improvin
 - **Expand Dataset**: Add more rows to the dataset for broader analysis and scalability testing.
 - **Advanced Querying**: Dive deeper into query optimization and explore the performance of SQL queries on larger datasets.
 
----
-
-## Contributing
-If you would like to contribute to this project, feel free to fork the repository, submit pull requests, or raise issues.
-
----
-
-## License
-This project is licensed under the MIT License.
